@@ -3,7 +3,7 @@ module Uaid
     @supported ||= [
       /safari [34]/,
       /chrome/,
-      /firefox/,
+      /firefox [23]/,
       /ie [678]/,
       /android/,
       /bot/
