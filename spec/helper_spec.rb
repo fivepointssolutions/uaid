@@ -9,6 +9,6 @@ describe Uaid::Helper do
   it 'should provide a user_agent from the current request' do
     @request = OpenStruct.new(:headers => {'user-agent' => 'whatever'})
     user_agent.should_not be_nil
-    user_agent.name.should == 'unknown'
+    user_agent.product.should == 'unknown'
   end
 end
