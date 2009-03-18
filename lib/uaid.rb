@@ -1,5 +1,5 @@
 require 'uaid/user_agent'
-require 'uaid/view_helper'
+require 'uaid/helper'
 
 module Uaid
 end

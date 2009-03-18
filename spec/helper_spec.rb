@@ -1,8 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper.rb')
 require 'ostruct'
 
-describe Uaid::ViewHelper do
-  include Uaid::ViewHelper
+describe Uaid::Helper do
+  include Uaid::Helper
   
   attr_reader :request
   
