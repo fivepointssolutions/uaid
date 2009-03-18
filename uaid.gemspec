@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{uaid}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Adam Williams"]
   s.date = %q{2009-03-18}
   s.description = %q{A small library useful to Rack-based Ruby applications for obtaining information about the user agent}
   s.email = %q{adam@thewilliams.ws}
-  s.files = ["VERSION.yml", "lib/uaid", "lib/uaid/helper.rb", "lib/uaid/user_agent.rb", "lib/uaid.rb", "spec/helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "spec/user_agent_spec.rb"]
+  s.files = ["VERSION.yml", "lib/uaid", "lib/uaid/extractor.rb", "lib/uaid/helper.rb", "lib/uaid/user_agent.rb", "lib/uaid.rb", "spec/extractor_spec.rb", "spec/helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "spec/user_agent_spec.rb"]
   s.homepage = %q{http://github.com/fivepointssolutions/uaid}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
