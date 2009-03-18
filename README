@@ -1,9 +1,10 @@
-browserid
+uaid
 =========
 
-Description goes here.
+A small library useful to Rack-based Ruby applications for obtaining
+information about the user agent.
 
 COPYRIGHT
 =========
 
-Copyright (c) 2008 Adam Williams. See LICENSE for details.
+Copyright (c) 2009 Five Points Solutions, Inc. See LICENSE for details.

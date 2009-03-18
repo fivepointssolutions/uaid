@@ -1,40 +1,33 @@
 require 'rake'
-require 'rake/testtask'
 require 'rake/rdoctask'
-require 'rcov/rcovtask'
+require 'spec/rake/spectask'
+
+task :default => :spec
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "browserid"
-    s.summary = "TODO"
+    s.name = "uaid"
+    s.summary = "A small library useful to Rack-based Ruby applications for obtaining information about the user agent"
     s.email = "adam@thewilliams.ws"
-    s.homepage = "http://github.com/aiwilliams/browserid"
-    s.description = "TODO"
+    s.homepage = "http://github.com/fivepointssolutions/uaid"
+    s.description = s.summary
     s.authors = ["Adam Williams"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-Rake::TestTask.new do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+desc "Run all specs"
+Spec::Rake::SpecTask.new do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = ['--options', 'spec/spec.opts']
 end
 
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'browserid'
+  rdoc.title    = 'uaid'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-Rcov::RcovTask.new do |t|
-  t.libs << 'test'
-  t.test_files = FileList['test/**/*_test.rb']
-  t.verbose = true
-end
-
-task :default => :rcov
