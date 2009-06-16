@@ -41,6 +41,9 @@ describe Uaid::UserAgent, 'identification questions' do
     stub(@user_agent).product { 'someproduct' }
     @user_agent.someproduct?.should be_true
     @user_agent.otherproduct?.should be_false
+    
+    stub(@user_agent).product { 'noagent' }
+    @user_agent.bot?.should be_false
   end
   
   it 'should answer for version' do

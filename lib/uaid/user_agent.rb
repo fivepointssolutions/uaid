@@ -52,8 +52,7 @@ module Uaid
     
     def method_missing(method, *args)
       if method.to_s =~ /^(\w+)\?$/
-        return true if (engine == $1 || product == $1)
-        @extractor.engines.include?($1) || @extractor.products.include?($1)
+        engine == $1 || product == $1
       else
         super
       end
