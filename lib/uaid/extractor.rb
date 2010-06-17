@@ -84,6 +84,7 @@ module Uaid
           'safari' => [
             ['3', /Version\/3/],
             ['4', /Version\/4/],
+            ['5', /Version\/5/],
           ],
           'mobilesafari' => [
             ['3', /Version\/3/],
