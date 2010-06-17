@@ -1,7 +1,7 @@
 module Uaid
   def Uaid.supported_agents
     @supported ||= [
-      /safari [34]/,
+      /safari [345]/,
       /chrome/,
       /firefox [23]/,
       /ie [678]/,
