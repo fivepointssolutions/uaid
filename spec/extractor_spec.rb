@@ -24,6 +24,11 @@ describe Uaid::Extractor do
     ["gecko", "firefox", "3"] => [
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1",
       "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1b3pre) Gecko/20090109 Shiretoko/3.1b3pre"],
+    ["ie", "ie", "10"] => [
+      "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)"],
+    ["ie", "ie", "9"] => [
+      "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)",
+      "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; InfoPath.3; MS-RTC LM 8; .NET4.0C; .NET4.0E)"],
     ["ie", "ie", "8"] => [
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; WOW64; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506; Media Center PC 5.0; .NET CLR 1.1.4322)"],
     ["ie", "ie", "7"] => [
@@ -31,6 +36,16 @@ describe Uaid::Extractor do
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"],
     ["ie", "ie", "6"] => [
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"],
+    ["ie", "ie", "5"] => [
+      "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98;)"],
+    ["ie", "ie", "4"] => [
+      "Mozilla/4.0 (compatible; MSIE 4.0; Windows NT)",
+      "Mozilla/4.0 (compatible; MSIE 4.5; Mac_PowerPC)"],
+    ["ie", "ie", "3"] => [
+      "Mozilla/2.0 (compatible; MSIE 3.0; Windows 95)",
+      "Mozilla/3.0 (compatible; MSIE 3.0; Windows NT 5.0)"],
+    ["ie", "ie", "2"] => [
+      "Mozilla/1.22 (compatible; MSIE 2.0; Windows 3.1)"],
     ["webkit", "mobilesafari", "3"] => [
       "Mozilla/5.0 (iPhone; U; XXXXX like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/241 Safari/419.3"],
     ["webkit", "android", "0"] => [

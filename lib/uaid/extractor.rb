@@ -73,9 +73,15 @@ module Uaid
       def version_extractions(product)
         @version_extractions ||= {
           'ie' => [
-            ['7', /MSIE 7/],
-            ['8', /MSIE 8/],
-            ['6', /MSIE 6/],
+            ['10', /MSIE 10/],
+            ['9',  /MSIE 9/],
+            ['8',  /MSIE 8/],
+            ['7',  /MSIE 7/],
+            ['6',  /MSIE 6/],
+            ['5',  /MSIE 5/],
+            ['4',  /MSIE 4/],
+            ['3',  /MSIE 3/],
+            ['2',  /MSIE 2/]
           ],
           'firefox' => [
             ['3', /Firefox\/3|Shiretoko/],
