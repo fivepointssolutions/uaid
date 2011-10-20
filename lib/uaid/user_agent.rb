@@ -50,6 +50,10 @@ module Uaid
     def version?(e)
       version == e
     end
+
+    def chromeframe?
+      !!(agent =~ /chromeframe/)
+    end
     
     def method_missing(method, *args)
       if method.to_s =~ /^(\w+)\?$/

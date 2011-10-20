@@ -53,10 +53,10 @@ module Uaid
       
       def product_extractions
         @product_extractions ||= [
+          ['chrome',       [/Chrome.*?Safari|chromeframe/]], # this must be first to detect chromeframe
           ['ie',           [/MSIE/]],
           ['mobilesafari', [/iPhone.*?Version.*?Safari/]],
           ['safari',       [/Version.*?Safari/]],
-          ['chrome',       [/Chrome.*?Safari/]],
           ['firefox',      [/Firefox|BonEcho|Shiretoko/]],
           ['android',      [/Android/]],
           ['bot',          [/googlebot|msnbot|ia_archiver/i]],
@@ -91,7 +91,7 @@ module Uaid
             ['\1', /Version\/([\d\.]+)/],
           ],
           'chrome' => [
-            ['\1', /Chrome\/([\d\.A-Z]*)/],
+            ['\2', /(Chrome|chromeframe)\/([\d\.A-Z]*)/],
           ],
           'android' => [
             ['0', /Android 0\./],

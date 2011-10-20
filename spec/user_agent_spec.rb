@@ -78,4 +78,14 @@ describe Uaid::UserAgent, 'identification questions' do
     @user_agent.should_not be_supported
   end
 
+  it 'should respond true when chromeframe is in agent string' do
+    user_agent = Uaid::UserAgent.new('... chromeframe ...')
+    user_agent.should be_chromeframe 
+  end
+
+  it 'should respond false when chromeframe is not in agent string' do
+    user_agent = Uaid::UserAgent.new('unknown')
+    user_agent.should_not be_chromeframe 
+  end
+
 end
