@@ -18,15 +18,16 @@ module Uaid
   end
   
   class UserAgent
-    attr_reader :agent, :engine, :product, :version, :supported
+    attr_reader :agent, :engine, :product, :supported
     
     def initialize(agent, extractor = Uaid.extractor)
       @agent, @extractor = agent, extractor
-      @engine, @product, @version = @extractor.extract(@agent ? @agent.strip : '')
+      @engine, @product, version = @extractor.extract(@agent ? @agent.strip : '')
+      @version = Uaid::Version.new(version)
     end
     
     def identifier
-      [engine, product, product + version].join(' ')
+      [engine, product, product + version.major.to_s, product + version.major.to_s + '-' + version.minor.to_s].join(' ')
     end
     
     def supported?
@@ -44,6 +45,10 @@ module Uaid
     
     def unsupported?
       !supported?
+    end
+
+    def version
+      
     end
     
     def version?(e)

@@ -10,7 +10,7 @@ describe Uaid::UserAgent, 'identification questions' do
   end
   
   [
-    ['unknown', 'bot', '1'],
+    ['unknown', 'bot', '1.0'],
     ['webkit', 'unknown', '1'],
     ['webkit', 'bot', 'x'],
   ].each do |attributes|
@@ -19,7 +19,7 @@ describe Uaid::UserAgent, 'identification questions' do
       user_agent = Uaid::UserAgent.new('unknown')
       stub(@user_agent).engine { engine }
       stub(@user_agent).product { product }
-      stub(@user_agent).version { version }
+      stub(@user_agent).version { Uaid::Version.new(version) }
       @user_agent.unknown?.should be_true
     end
   end
@@ -27,7 +27,7 @@ describe Uaid::UserAgent, 'identification questions' do
   it 'should answer false for unknown when all attributes are known' do
     stub(@user_agent).engine { 'someengine' }
     stub(@user_agent).product { 'someproduct' }
-    stub(@user_agent).version { '1' }
+    stub(@user_agent).version { Uaid::Version.new('1.0') }
     @user_agent.unknown?.should be_false
   end
   
@@ -47,34 +47,35 @@ describe Uaid::UserAgent, 'identification questions' do
   end
   
   it 'should answer for version' do
-    stub(@user_agent).version { '2' }
+    stub(@user_agent).version { Uaid::Version.new('2.0') }
     @user_agent.version?('2').should be_true
   end
   
-  it 'should answer an identifier which include the engine, product and version' do
+  it 'should answer an identifier which include the engine, product and major version' do
     stub(@user_agent).engine { 'someengine' }
     stub(@user_agent).product { 'someproduct' }
-    stub(@user_agent).version { '1' }
-    @user_agent.identifier.should == 'someengine someproduct someproduct1'
+    stub(@user_agent).version { Uaid::Version.new('5.5') }
+    @user_agent.identifier.should == 'someengine someproduct someproduct5 someproduct5-5'
   end
   
   it 'should answer supported as true when all attributes match a supported agent' do
     stub(@user_agent).engine { 'webkit' }
     stub(@user_agent).product { 'safari' }
-    stub(@user_agent).version { '3' }
+    stub(@user_agent).version { Uaid::Version.new('3.0') }
     @user_agent.should be_supported
   end
   
   it 'should answer supported when an entry in the supported list is a regular expression' do
     Uaid.supported_agents = [/safari [34]/]
     stub(@user_agent).product { 'safari' }
-    stub(@user_agent).version { '3' }
+    stub(@user_agent).version { Uaid::Version.new('3.0') }
     @user_agent.should be_supported
     
-    stub(@user_agent).version { '4' }
+    stub(@user_agent).version { Uaid::Version.new('4.0') }
     @user_agent.should be_supported
     
-    stub(@user_agent).version { '2' }
+    stub(@user_agent).version { Uaid::Version.new('2.0') }
     @user_agent.should_not be_supported
   end
+
 end
