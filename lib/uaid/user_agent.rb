@@ -47,10 +47,6 @@ module Uaid
       !supported?
     end
 
-    def version
-      
-    end
-    
     def version?(e)
       version == e
     end
