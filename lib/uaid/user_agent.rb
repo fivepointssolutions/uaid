@@ -18,7 +18,7 @@ module Uaid
   end
   
   class UserAgent
-    attr_reader :agent, :engine, :product, :supported
+    attr_reader :agent, :engine, :product, :supported, :version
     
     def initialize(agent, extractor = Uaid.extractor)
       @agent, @extractor = agent, extractor
