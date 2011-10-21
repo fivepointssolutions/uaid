@@ -39,18 +39,24 @@ module Uaid
       def extract_version(agent, product, engine)
         case extractions = version_extractions(product)
         when Array
-          match = extractions.detect {|version, regexp| agent =~ regexp}
-          match ? match[0] : 'x'
+          match = nil
+          extractions.each do |version, regexp|
+            if data = regexp.match(agent)
+              match = substitutions(version, data)
+              break
+            end
+          end
+          match ? match : 'x'
         when nil: 'x'
         end
       end
       
       def product_extractions
         @product_extractions ||= [
+          ['chrome',       [/Chrome.*?Safari|chromeframe/]], # this must be first to detect chromeframe
           ['ie',           [/MSIE/]],
           ['mobilesafari', [/iPhone.*?Version.*?Safari/]],
           ['safari',       [/Version.*?Safari/]],
-          ['chrome',       [/Chrome.*?Safari/]],
           ['firefox',      [/Firefox|BonEcho|Shiretoko/]],
           ['android',      [/Android/]],
           ['bot',          [/googlebot|msnbot|ia_archiver/i]],
@@ -73,24 +79,19 @@ module Uaid
       def version_extractions(product)
         @version_extractions ||= {
           'ie' => [
-            ['7', /MSIE 7/],
-            ['8', /MSIE 8/],
-            ['6', /MSIE 6/],
+            ['\1', /MSIE ([\d\.b]+)/],
           ],
           'firefox' => [
-            ['3', /Firefox\/3|Shiretoko/],
-            ['2', /Firefox\/2|BonEcho\/2/],
+            ['\2', /(Firefox|BonEcho|Shiretoko)\/([a-z\d\.]+)/],
           ],
           'safari' => [
-            ['3', /Version\/3/],
-            ['4', /Version\/4/],
-            ['5', /Version\/5/],
+            ['\1', /Version\/([\d\.]+)/],
           ],
           'mobilesafari' => [
-            ['3', /Version\/3/],
+            ['\1', /Version\/([\d\.]+)/],
           ],
           'chrome' => [
-            ['1', /Chrome\/[01]\./],
+            ['\2', /(Chrome|chromeframe)\/([\d\.A-Z]*)/],
           ],
           'android' => [
             ['0', /Android 0\./],
@@ -101,16 +102,22 @@ module Uaid
       
       # Answers the first matching extraction. Keep this in mind when adding
       # patterns!
-      #
       def find_match_in_extractions(agent, extractions)
         match = nil
         extractions.each do |answer, patterns|
-          matches = patterns.inject(true) {|m,pattern| m && agent =~ pattern}
-          next unless matches
-          match = answer
-          break
+          patterns.each do |pattern|
+            if data = pattern.match(agent)
+              match = substitutions(answer, data)
+              break
+            end
+          end
+          break if match
         end
         match
+      end
+
+      def substitutions(string, data)
+        string.gsub(/\\(\d)/) { data[$1.to_i] }
       end
   end
 end
